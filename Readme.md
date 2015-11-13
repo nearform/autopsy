@@ -9,7 +9,7 @@ or npm. We need to a) properly host the assets
 and b) write asset downloading into the setup script
 
 * `git clone` this repo
-* download assets.zip - extract within repo
+* download [assets.zip][] - extract within repo
 * `npm link` 
 
 
@@ -175,5 +175,5 @@ For starters, and then if you want to get fancy
 * yes - the vmdk file needs to be separate from the smartos.ova file
 
 [mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
-
+[assets.zip]: https://drive.google.com/file/d/0B7fVI2pg3JazU1RwZFhTN3hwV0E/view?usp=sharing
 
