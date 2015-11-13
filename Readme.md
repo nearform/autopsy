@@ -104,6 +104,10 @@ For using mdb see the [mdb reference docs][]
 In production, if we run our node processes with `--abort-on-uncaught-exception` we will always get a core dump when a process crashes (that is,
 as long as our linux environment is set up correctly)
 
+You can also manually generate a core file using `process.abort()`.
+
+Finally a core file can also be obtained by attaching `gdb` to a running processing and executing `generate-core`. 
+
 ## Setting up Linux to generate core files
 
 If you're using an ubuntu server (and probably debian etc. etc.) you may have apport installed - this intercepts core files so we need to get rid of it
