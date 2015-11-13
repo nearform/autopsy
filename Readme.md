@@ -165,6 +165,8 @@ For starters, and then if you want to get fancy
 * work out if this is a problem "mdb: warning: librtld_db failed to initialize; shared library information will not be available" - may need a patch in the vm
 * get ssh keys into the vm instead of passing a pw with expect, granted the pw being plain text in this case doesn't matter, but we might be able to get rid of the dependency on expect if we get rid of the pw. 
 * vm shouldn't need 5gb of ram, sort that out. 
+* extend this into another project that runs node processes in smart os zones (just like docker containers) - but with the added benefit of native smart os core dumps which can be analysed with mdb
+
 
 ## Other
 
