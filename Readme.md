@@ -27,12 +27,13 @@ But it turns out that mdb can analyse linux core files,
 we just have to give it the core file and the node binary
 that was running when the core file was generated.
 
-The problem is, actually getting you're linux core file
-into an environment that is running mdb is... painful.
+The problem is, actually getting you linux core file
+into an environment that is running a version of mdb 
+that this can work with is... painful.
 
-So, autopsy abstracts that pain away (as much as we can),
-and installs an `autopsy` executable on linux that essentially
-acts as a proxy to the mdb client within the smartos vm.
+So, autopsy abstracts that pain away, and installs an `autopsy`
+executable on linux that essentially acts as a proxy to the 
+mdb client within the smartos vm.
 
 You can also run autopsy on OS X, but you'll need the linux
 node binary and core file to pass to it. 
