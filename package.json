@@ -1,0 +1,40 @@
+{
+  "name": "autopsy",
+  "version": "0.0.1",
+  "description": "dissect dead node service core dumps with mdb via a smart os vm",
+  "main": "index.js",
+  "bin": {
+    "autopsy": "./bin/mdb.js",
+    "autopsy-start": "./bin/start.js",
+    "autopsy-stop": "./bin/stop.js",
+    "autopsy-setup": "./bin/setup.js",
+    "autopsy-status": "./bin/setup.js"
+  },
+  "scripts": {
+    "setup": "node ./bin/setup.js",
+    "status": "node ./bin/status.js",
+    "start": "node ./bin/start.js",
+    "stop": "node ./bin/stop.js",
+    "postinstall": "npm run setup"
+  },
+  "author": "David Mark Clements",
+  "license": "MIT",
+  "dependencies": {
+    "split": "^1.0.0",
+    "through2": "^2.0.0",
+    "vboxmanage": "0.0.15",
+    "which": "^1.2.0"
+  },
+  "directories": {
+    "example": "example"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nearform/autopsy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nearform/autopsy/issues"
+  },
+  "homepage": "https://github.com/nearform/autopsy#readme"
+}
