@@ -187,5 +187,5 @@ to locate the the iso and vmdk files). In this case you would need to
 manually update virtual box with the paths. 
 
 [mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
-
+[assets.zip]: https://drive.google.com/file/d/0B7fVI2pg3JazU1RwZFhTN3hwV0E/view?usp=sharing
 
