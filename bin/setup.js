@@ -2,7 +2,9 @@
 var path = require('path')
 var vbm = require('vboxmanage')
 var fs = require('fs')
+var download = require('../lib/download')
 
+console.time('SETUP TIME')
 console.log('SETUP: Setting up smartos vm')
 
 vbm.machine.list(function (err, list) {
@@ -18,13 +20,29 @@ vbm.machine.list(function (err, list) {
     return
   }
 
-  setup()
+  var assets = 'https://s3-us-west-2.amazonaws.com/autopsy-assets/assets.tar.gz'
+
+
+
+  download(assets, function (err) {
+    if (err) {
+      if (err.message !== download.errors.ASSETS_EXIST) return console.error(err)
+      console.warn('Download: ', err.message)
+      console.log('Proceeding with setup')
+    }
+    console.log('...ok')
+    setup(function (err) {
+      if (err) return console.error(err)
+      console.log('SETUP: smart os vm has been set up')
+      console.timeEnd('SETUP TIME')
+    })
+  })
 
 })
 
-function setup () {
+function setup (cb) {
   vbm.machine.import(path.join(__dirname, '../assets/smartos.ova'), 'smartos', function (err) {
-    if (err) return console.error(err)
+    if (err) return cb(err)
 
     //have to copy the file so we still have it, 
     //otherwise the naughty virtual box steals it
@@ -42,8 +60,7 @@ function setup () {
       '--medium', path.join(__dirname, '../assets/smartos-disk1.vmdk')
     ]
     vbm.command.exec('storageattach', args, function (err, code, output) {
-      if (err) 
-        return console.error(code, err, output)
+      if (err) return cb(err)
 
       var args = [
         'smartos',
@@ -55,8 +72,7 @@ function setup () {
       ]
 
       vbm.command.exec('storageattach', args, function (err, code, output) {
-        if (err) 
-          return console.error(code, err, output)
+        if (err) return cb(err)
         
         var args = [
           'smartos',
@@ -64,10 +80,8 @@ function setup () {
         ]
 
         vbm.command.exec('modifyvm', args, function (err, code, output) {
-          if (err) 
-            return console.error(code, err, output)
-          console.log('SETUP: smart os vm has been set up')
-        
+          if (err) return cb(err)
+          cb()
         })
       })
     })

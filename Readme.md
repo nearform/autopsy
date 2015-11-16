@@ -2,17 +2,6 @@
 
 dissect dead node service core dumps with mdb via a smart os vm
 
-## alpha - setup
-
-File size of vm resources is too large for github
-or npm. We need to a) properly host the assets
-and b) write asset downloading into the setup script
-
-* `git clone` this repo
-* download assets.zip - extract within repo
-* `npm link` 
-
-
 ## Why?
 
 mdb is an awesome debugger that comes with smart os.
@@ -63,10 +52,13 @@ On OS X - well we can work it out ;)
 sudo npm install -g autopsy
 ```
 
-This will install autopsy on the system and immediately
-setup a smartos vm in virtual box. The install will take
-a long time. 
+This will install autopsy on the system, download smartos
+virtual machine assets and setup a smartos vm in virtual box. 
 
+The VM assets download is ~450mb, in testing on a fairly decent
+connection, setup from start to finish (not including npm dep installs)
+takes around 1.5 minutes. This is because we're using multithreaded 
+downloading and host the assets on S3. 
 
 Once finished the following executables will be available
 
@@ -75,6 +67,17 @@ Once finished the following executables will be available
 * autopsy-status - gets vm status
 * autopsy-setup - runs setup (only needful for troubleshooting)
 * autopsy - provides the CLI proxy to mdb in the vm
+
+### Resuming Setup
+
+If postinstall setup is interupted for any reason (including network failure
+during assets download), you can try again with
+
+```sh
+npm run setup
+```
+
+If there was a partial download, it should resume rather than restart. 
 
 ## autopsy
 
@@ -173,6 +176,15 @@ For starters, and then if you want to get fancy
 * there is totally a reason for the method in terms of vm setup
 * yes - we need to use an iso (and not the usb image)
 * yes - the vmdk file needs to be separate from the smartos.ova file
+
+## Caveats
+
+* We recommend installing globally, since there can only be one
+smartos vm. 
+* If the assets folder or any parent folder is moved or
+renamed, the vm will fail to start (because it won't be able
+to locate the the iso and vmdk files). In this case you would need to 
+manually update virtual box with the paths. 
 
 [mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
 
