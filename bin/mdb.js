@@ -39,7 +39,7 @@ prepare(process.argv.slice(2), function (err, args) {
   function ready(data) {
     if (ready.rx.test(data+'')) {
       ready.now = true
-      mdb.stdin.write('::load v8\n')
+      mdb.stdin.write('::load /mdb/mdb_v8.so\n')
     }
     
     return ready.now

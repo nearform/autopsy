@@ -71,10 +71,10 @@ Once finished the following executables will be available
 ### Resuming Setup
 
 If postinstall setup is interupted for any reason (including network failure
-during assets download), you can try again with
+during assets download), try again with
 
 ```sh
-npm run setup
+autopsy-setup
 ```
 
 If there was a partial download, it should resume rather than restart. 
@@ -160,6 +160,10 @@ For starters, and then if you want to get fancy
 > 137289672551::jsprint
 ```
 
+## todo
+
+* get up arrow (for history) working
+
 ## Future
 
 * reduce size of everything
@@ -170,6 +174,46 @@ For starters, and then if you want to get fancy
 * vm shouldn't need 5gb of ram, sort that out. 
 * extend this into another project that runs node processes in smart os zones (just like docker containers) - but with the added benefit of native smart os core dumps which can be analysed with mdb
 
+
+
+## mdb_v8 upgrade notes
+
+The latest smartos comes with an old version of mdb_v8, as of autopsy 0.0.2 the vm runs mdb_v8 1.2.2 (latest at time of writing)
+To upgrade the v8 version (without waiting for an autopsy release) we can perform the following steps
+
+1. login to the vm `ssh -p 2222 root@localhost` pw: mdb
+2. login to the zone `zlogin 7f3ba160-047c-4557-9e87-8157db23f205`
+3. `mkdir /mdb && cd /mdb`
+4. `pkgin install gcc49-4.9.1 gmake-4.0 git`
+5. `git clone https://github.com/joyent/mdb_v8`
+6. `cd mdb_v8 && make`
+7. `cp mdb_v8/builds/amd64/mdb_v8.so .`
+
+At this point we have successfully upgraded to latest mdb_v8, however 
+we have a lot of extra dev packages installed in the vm making it much 
+less lean. So, we may want to copy the `mdb_v8.so` file from the vm, like so:
+
+```sh
+scp -P 2222 root@localhost:/zones/7f3ba160-047c-4557-9e87-8157db23f205/root/mdb/mdb_v8.so .
+```
+
+Then recreate the vm (follow removing the vm below, then `npm run setup`) and copy the file back in (this is what we do for releases).
+
+```sh
+scp -P 2222 mdb_v8.so root@localhost:/zones/7f3ba160-047c-4557-9e87-8157db23f205/root/mdb
+```
+
+
+## removing the vm
+
+Currently there's no command for removing the vm, follow these steps, in order
+
+1. open virtual box, right click the vm, click remove - then click "delete all files"
+2. rm the `assets` folder from the autopsy module folder `rm $(npm get prefix)/lib/node_modules/autopsy/assets`
+3. make sure there isn't a smartos folder left in the virtual box virtual machines folder (`~/VirtualBox\ VMs`)
+
+[mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
+[assets.zip]: https://drive.google.com/file/d/0B7fVI2pg3JazU1RwZFhTN3hwV0E/view?usp=sharing
 
 ## Other
 
@@ -184,8 +228,4 @@ smartos vm.
 * If the assets folder or any parent folder is moved or
 renamed, the vm will fail to start (because it won't be able
 to locate the the iso and vmdk files). In this case you would need to 
-manually update virtual box with the paths. 
-
-[mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
-[assets.zip]: https://drive.google.com/file/d/0B7fVI2pg3JazU1RwZFhTN3hwV0E/view?usp=sharing
-
+manually update virtual box with the paths.

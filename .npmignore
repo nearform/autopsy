@@ -1,5 +1,5 @@
 example
 assets
-assets.tar.gz
+assets*.tar.gz
 assets.download
 _assets
