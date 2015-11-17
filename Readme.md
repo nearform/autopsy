@@ -38,6 +38,30 @@ Autopsy depends on virtual box, on ubuntu/debian we can do
 sudo apt-get install virtualbox
 ```
 
+Sometimes the virtualbox package for ubuntu seems to have
+problems with kernel versions (particularly if we're installing
+virtualbox into an ubuntu vm). We can check whether the virtualbox
+install was successful with: 
+
+```sh
+VBoxManage --version
+```
+
+If we see some error output about the character device /dev/vboxdrv 
+does not exist then there's a problem. 
+
+
+In this case we can grab the latest `.deb` file from the virtualbox site, e.g.:
+
+```sh
+$ sudo apt-get purge virtualbox
+$ curl http://download.virtualbox.org/virtualbox/5.0.10/virtualbox-5.0_5.0.10-104061~Ubuntu~trusty_amd64.deb > vbox.deb
+$ sudo apt-get install linux-headers-`uname -r`
+$ sudo dpkg -i vbox.deb
+```
+
+To find the right deb package for your Linux distro see <https://www.virtualbox.org/wiki/Linux_Downloads>. 
+
 There's also currently a hard dependency on `expect`
 
 ```sh
