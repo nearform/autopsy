@@ -40,7 +40,7 @@ vbm.machine.list(function (err, list) {
 })
 
 function setup (cb) {
-  vbm.machine.import(path.join(__dirname, '../assets/smartos.ova'), 'smartos', function (err) {
+  vbm.machine.import(path.join(__dirname, '../assets/smartos.ovf'), 'smartos', function (err) {
     if (err) return cb(err)
 
     //have to copy the file so we still have it, 

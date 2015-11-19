@@ -236,14 +236,6 @@ Currently there's no command for removing the vm, follow these steps, in order
 2. rm the `assets` folder from the autopsy module folder `rm $(npm get prefix)/lib/node_modules/autopsy/assets`
 3. make sure there isn't a smartos folder left in the virtual box virtual machines folder (`~/VirtualBox\ VMs`)
 
-[mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
-[assets.zip]: https://drive.google.com/file/d/0B7fVI2pg3JazU1RwZFhTN3hwV0E/view?usp=sharing
-
-## Other
-
-* there is totally a reason for the method in terms of vm setup
-* yes - we need to use an iso (and not the usb image)
-* yes - the vmdk file needs to be separate from the smartos.ova file
 
 ## Caveats
 
@@ -253,3 +245,5 @@ smartos vm.
 renamed, the vm will fail to start (because it won't be able
 to locate the the iso and vmdk files). In this case you would need to 
 manually update virtual box with the paths.
+
+[mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
