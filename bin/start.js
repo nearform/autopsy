@@ -7,7 +7,7 @@ function up (err) {
   console.log('vm up, waiting for ready state')
 }
 
-function ready(err) {
+function ready (err) {
   if (err) return console.error(err)
-  console.log('vm ready') 
+  console.log('vm ready')
 }

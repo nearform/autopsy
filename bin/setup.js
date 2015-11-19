@@ -20,35 +20,25 @@ vbm.machine.list(function (err, list) {
     return
   }
 
-
-
-
   download(assets, function (err) {
-    if (err) {
-      if (err.message !== download.errors.ASSETS_EXIST) return console.error(err)
-      console.warn('Download: ', err.message)
-      console.log('Proceeding with setup')
-    }
-    console.log('...ok')
+    if (err) return console.error(err)
     setup(function (err) {
       if (err) return console.error(err)
       console.log('SETUP: smart os vm has been set up')
       console.timeEnd('SETUP TIME')
     })
   })
-
 })
 
 function setup (cb) {
   vbm.machine.import(path.join(__dirname, '../assets/smartos.ovf'), 'smartos', function (err) {
     if (err) return cb(err)
 
-    //have to copy the file so we still have it, 
-    //otherwise the naughty virtual box steals it
+    // have to copy the file so we still have it,
+    // otherwise the naughty virtual box steals it
     fs.writeFileSync(
-      path.join(__dirname, '../assets/smartos-disk1.vmdk'), 
+      path.join(__dirname, '../assets/smartos-disk1.vmdk'),
       fs.readFileSync(path.join(__dirname, '../assets/_smartos-disk1.vmdk')))
-
 
     var args = [
       'smartos',
@@ -72,7 +62,7 @@ function setup (cb) {
 
       vbm.command.exec('storageattach', args, function (err, code, output) {
         if (err) return cb(err)
-        
+
         var args = [
           'smartos',
           '--macaddress1', '080027B0011A'
@@ -84,8 +74,5 @@ function setup (cb) {
         })
       })
     })
-
-
   })
-
 }
