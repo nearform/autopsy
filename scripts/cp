@@ -1,9 +1,0 @@
-#!/usr/bin/expect
-set arg1 [lindex $argv 0]
-set arg2 [lindex $argv 1]
-
-eval spawn scp -P 2222 {*}$argv root@localhost:/zones/7f3ba160-047c-4557-9e87-8157db23f205/root/root
-set prompt ":|#|\\\$"
-interact -o -nobuffer -re $prompt return
-send "mdb\r"
-interact

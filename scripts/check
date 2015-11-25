@@ -1,7 +1,0 @@
-#!/usr/bin/expect
-
-eval spawn ssh -p 2222 root@localhost
-set prompt ":|#|\\\$"
-interact -o -nobuffer -re $prompt return
-send "mdb\r"
-interact -o -nobuffer -re $prompt return

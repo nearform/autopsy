@@ -1,6 +1,8 @@
+vm-dev
 npm-debug.log
 node_modules
 assets
 assets*.tar.gz
 assets*.download
 _assets
+assets_
