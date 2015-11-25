@@ -5,6 +5,7 @@
   "main": "index.js",
   "preferGlobal": true,
   "files": [
+    "Readme.md",
     "banner.txt",
     "bin",
     "lib"
@@ -37,7 +38,7 @@
     "ssh2": "^0.4.12",
     "tar-stream": "^1.3.1",
     "through2": "^2.0.0",
-    "vboxmanage": "davidmarkclements/node-vboxmanage",
+    "vboxmanage": "github:davidmarkclements/node-vboxmanage",
     "which": "^1.2.0"
   },
   "directories": {
