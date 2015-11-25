@@ -43,7 +43,7 @@ For using mdb see the [mdb reference docs][]
 Install autopsy from npm:
 
 ```
-sudo npm install -g autopsy
+npm install -g autopsy
 ```
 
 Once finished the following executables will be available
