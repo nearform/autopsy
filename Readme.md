@@ -13,8 +13,8 @@ ships with SmartOS - it can be used to inspect execution
 context from the kernel to application layers.
 
 Some rather clever people wrote a debugging module called `mdb_v8` 
-that allows introspection of node core dumps - i.e. JavaScript
-stack and heap analysis.
+that allows introspection of node core dumps from a high level (e.g.
+inspecting closure scope) to a low level (e.g. memory addresses).
 
 It turns out that `mdb` can analyse Linux core files as well
 as SmartOS core files. We just have provide the core file 
