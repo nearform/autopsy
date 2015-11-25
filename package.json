@@ -4,6 +4,11 @@
   "description": "dissect dead node service core dumps with mdb via a smart os vm",
   "main": "index.js",
   "preferGlobal": true,
+  "files": [
+    "banner.txt",
+    "bin",
+    "lib"
+  ],
   "bin": {
     "autopsy": "./bin/mdb.js",
     "autopsy-start": "./bin/start.js",
