@@ -4,6 +4,8 @@ dissect dead node service core dumps with mdb via a smart os vm
 
 ## About
 
+![autopsy](https://raw.githubusercontent.com/nearform/autopsy/master/rec/autopsy.gif)
+
 There is a Unix-like operating system called SmartOS whose 
 ancestry represents a strong investment in low-level 
 introspection tools (such as dtrace for instance).
