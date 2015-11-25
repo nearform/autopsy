@@ -4,18 +4,25 @@ dissect dead node service core dumps with mdb via a smart os vm
 
 ## About
 
-`mdb` is a high quality debugger that comes with SmartOS.
+There is a Unix-like operating system called SmartOS whose 
+ancestry represents a strong investment in low-level 
+introspection tools (such as dtrace for instance).
 
-There's an extension for it called `mdb_v8` that allows
-introspection of node core dumps.
+Once such tool is `mdb`, a high quality modular debugger which
+ships with SmartOS - it can be used to inspect execution
+context from the kernel to application layers.
 
-It turns out that mdb can analyse linux core files as well
+Some rather clever people wrote a debugging module called `mdb_v8` 
+that allows introspection of node core dumps - i.e. JavaScript
+stack and heap analysis.
+
+It turns out that `mdb` can analyse Linux core files as well
 as SmartOS core files. We just have provide the core file 
 and the node binary that was running when the core dump was 
 generated.
 
-`autopsy` essentially acts as a proxy to the mdb client 
-within a SmartOS vm.
+`autopsy` installs a a SmartOS VM and then acts as a 
+stdio proxy to `mdb`.
 
 For using mdb see the [mdb reference docs][]
 
