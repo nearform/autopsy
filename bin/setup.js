@@ -5,7 +5,7 @@ var vbm = require('../lib/vbm')
 var download = require('./download')
 
 module.exports = function setupCmd() {
-
+  vbm = vbm()
   console.time('SETUP TIME')
   console.log('SETUP: Setting up smartos vm')
 
