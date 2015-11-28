@@ -12,6 +12,7 @@
   ],
   "bin": {
     "autopsy": "./bin/mdb.js",
+    "autopsy-ssh": "./bin/ssh.js",
     "autopsy-start": "./bin/start.js",
     "autopsy-stop": "./bin/stop.js",
     "autopsy-setup": "./bin/setup.js",
