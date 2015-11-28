@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-require('../lib/status')(function (err, status) {
-  if (err) return console.error(err)
-  console.log('vm is ' + (status ? 'up' : 'down'))
-})
+var status = require('../lib/status')
+
+module.exports = function statusCmd() { 
+  status(function (err, status) {
+    if (err) return console.error(err)
+    console.log('vm is ' + (status ? 'up' : 'down'))
+  })
+}
+
+if (!module.parent) { module.exports(process.argv.slice(2)) }

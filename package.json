@@ -1,8 +1,7 @@
 {
   "name": "autopsy",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "dissect dead node service core dumps with mdb via a smart os vm",
-  "main": "index.js",
   "preferGlobal": true,
   "files": [
     "Readme.md",
@@ -11,23 +10,12 @@
     "lib"
   ],
   "bin": {
-    "autopsy": "./bin/mdb.js",
-    "autopsy-ssh": "./bin/ssh.js",
-    "autopsy-start": "./bin/start.js",
-    "autopsy-stop": "./bin/stop.js",
-    "autopsy-setup": "./bin/setup.js",
-    "autopsy-status": "./bin/setup.js"
-  },
-  "scripts": {
-    "setup": "node ./bin/setup.js",
-    "download-assets": "node ./bin/download.js",
-    "status": "node ./bin/status.js",
-    "start": "node ./bin/start.js",
-    "stop": "node ./bin/stop.js"
+    "autopsy": "./cmd.js"
   },
   "author": "David Mark Clements",
   "license": "MIT",
   "dependencies": {
+    "commist": "^1.0.0",
     "debug": "^2.2.0",
     "end-of-stream": "^1.1.0",
     "fast-download": "^0.3.5",

@@ -48,10 +48,11 @@ npm install -g autopsy
 
 Once finished the following executables will be available
 
-* autopsy-setup - runs setup
-* autopsy-start - starts the vm
-* autopsy-stop - stops the vm
-* autopsy-status - gets vm status
+* autopsy setup - runs setup
+* autopsy start - starts the vm
+* autopsy stop - stops the vm
+* autopsy status - gets vm status
+* autopsy ssh - use exactly as you would ssh, provides a tunnel from a server to locally installed vm
 * autopsy - provides the CLI proxy to mdb in the vm
 
 Next, set up the VM
@@ -59,7 +60,7 @@ Next, set up the VM
 ### VM Setup
 
 ```
-autopsy-setup
+autopsy setup
 ```
 
 This will install autopsy on the system, download smartos
@@ -78,7 +79,7 @@ Before we can do an autopsy the VM needs to be running.
 Simply run
 
 ```
-autopsy-start
+autopsy start
 ```
 
 Autopsy takes a snapshot of the initial VM state on first run to
@@ -115,7 +116,7 @@ For using mdb see the [mdb reference docs][]
 When we're done we may wish to free memory by stopping the VM with
 
 ```
-autopsy-stop
+autopsy stop
 ```
 
 ## Example
@@ -144,10 +145,38 @@ For starters, and then if you want to get fancy
 > 137289672551::jsprint
 ```
 
+
+## Autopsy on EC2 or in a VM
+
+EC2 (and other VPS-type solutions) runs "machines" in virtualized containers, it's very
+tricky to make a virtual machine run on a virtual machines, and even where it is possible
+there is either an insufferable performance cost and/or certain low level features must
+be enabled which risk of introducing security issues. That aside copying node, a core
+file and using mdb all in a ram-only VM is memory intensive - not something we want to
+do (or maybe even can do) on a production server.
+
+But autopsy provides a way to do seamless postmortems on an EC2 server or any kind of 
+linux VM - by setting up an SSH tunnel back to through the local machine and into the
+SmartOS vm running locally.
+
+This can be achieved in a few easy steps
+
+1. install autopsy on local system and run autopsy setup, ensure its working locally
+2. install autopsy within a VM or on an EC2 server (etc.)
+3. ssh into the server in the same way as always, except prefix the command with `autopsy`, like so: 
+
+```sh
+autopsy ssh -i myKey.pem user@example.com
+```
+
+Simply use whatever `ssh` flags you normally would, and autopsy will additionally
+set up the tunnelling (for the curious we inject the `-R` flag with the port of VM
+mapped through to the same port on the server.)
+
+
 ## How to generate a core file
 
-In production, if we run our node processes with `--abort-on-uncaught-exception` we will always get a core dump when a process crashes (that is,
-as long as our linux environment is set up correctly)
+In production, if we run our node processes with `--abort-on-uncaught-exception` we will always get a core dump when a process crashes (that is, as long as our linux environment is set up correctly)
 
 You can also manually generate a core file using `process.abort()`.
 
@@ -167,8 +196,6 @@ space for the core file, like so
 ```
 ulimit -c unlimited
 ```
-
-Put this in a start up script and what not.  
 
 ## Caveats
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-require('../lib/start')(up, ready)
+var start = require('../lib/start')
 
 function up (err, firstBoot) {
   if (err) return console.error(err)
@@ -15,3 +15,7 @@ function ready (err) {
   console.log('vm ready')
   process.exit(0)
 }
+
+module.exports = function startCmd() { start(up, ready) }
+
+if (!module.parent) { module.exports(process.argv.slice(2)) }

@@ -1,3 +1,7 @@
 #!/usr/bin/env node
 
-require('../lib/mdb')(process.argv.slice(2))
+var mdb = require('../lib/mdb')
+
+module.exports = mdb
+
+if (!module.parent) { module.exports(process.argv.slice(2)) }
