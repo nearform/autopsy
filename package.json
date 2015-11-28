@@ -4,6 +4,7 @@
   "description": "dissect dead node service core dumps with mdb via a smart os vm",
   "preferGlobal": true,
   "files": [
+    "cmd.js",
     "Readme.md",
     "banner.txt",
     "bin",
