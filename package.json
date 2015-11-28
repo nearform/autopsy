@@ -32,6 +32,7 @@
     "end-of-stream": "^1.1.0",
     "fast-download": "^0.3.5",
     "keypress": "^0.2.1",
+    "proc-cpuinfo": "^1.0.0",
     "progress-stream": "^1.1.1",
     "scp2": "^0.2.2",
     "split": "^1.0.0",
