@@ -1,17 +1,7 @@
 #!/usr/bin/env node
-
-var virtualized = require('../lib/in-virtualized-os')()
-
-if (virtualized) {
-  console.error('This is a virtualized environment, can\'t set up a vm in a vm')
-  console.error('However we can setup autopsy on our local machine and tunnel through')
-  console.error('Checkout the autopsy-ssh command for more info')
-  process.exit(1)
-}
-
 var path = require('path')
-var vbm = require('vboxmanage')
 var fs = require('fs')
+var vbm = require('../lib/vbm')
 var download = require('../lib/download')
 var assets = require('../lib/assets-uri')
 
