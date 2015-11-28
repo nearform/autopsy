@@ -236,7 +236,7 @@ DEBUG=autopsy:* <cmd>
 At present the following commands have debug output
 
 * autopsy
-* autopsy-setup
-* autopsy-start
+* autopsy setup
+* autopsy start
 
 [mdb reference docs]: https://github.com/joyent/mdb_v8/blob/master/docs/usage.md#node-specific-mdb-command-reference
