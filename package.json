@@ -1,6 +1,6 @@
 {
   "name": "autopsy",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "dissect dead node service core dumps with mdb via a smart os vm",
   "preferGlobal": true,
   "files": [
