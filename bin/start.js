@@ -16,6 +16,6 @@ function ready (err) {
   process.exit(0)
 }
 
-module.exports = function startCmd() { start(up, ready) }
+module.exports = function startCmd(cb) { start(up, cb || ready) }
 
 if (!module.parent) { module.exports(process.argv.slice(2)) }

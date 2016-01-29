@@ -52,6 +52,7 @@ Once finished the following executables will be available
 * autopsy start - starts the vm
 * autopsy stop - stops the vm
 * autopsy status - gets vm status
+* autopsy rm - removes vm
 * autopsy ssh - use exactly as you would ssh, provides a tunnel from a server to locally installed vm
 * autopsy - provides the CLI proxy to mdb in the vm
 

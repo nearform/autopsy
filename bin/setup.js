@@ -1,33 +1,56 @@
 #!/usr/bin/env node
 var path = require('path')
 var fs = require('fs')
-var vbm = require('../lib/vbm')
+var confirm = require('positive')
 var download = require('./download')
+var remove = require('../lib/remove')
+var start = require('./start')
+var stop = require('./stop')
+var vbm = require('../lib/vbm')
 
 module.exports = function setupCmd() {
-  vbm = vbm()
+  vbm = vbm instanceof Function ? vbm() : vbm
   console.time('SETUP TIME')
-  console.log('SETUP: Setting up smartos vm')
+  console.log('Setting up smartos vm')
 
-  vbm.machine.list(function (err, list) {
+  vbm.machine.list(function fetch(err, list) {
     if (err) return console.error(err)
     var exists = Object.keys(list).some(function (name) {
       return name === 'smartos'
     })
 
+    if (exists && confirm('there is already a smartos vm, would you like to remove it? [Y/n] ')) { 
+      return remove(function (err) {
+        if (err) return console.error(err)
+        setupCmd()
+      })
+    }
+
     if (exists) {
-      console.warn('SETUP: there is already a smartos vm')
-      console.warn('SETUP: exiting gracefully')
-      console.warn('')
-      return
+      console.error('cannot proceed without removing existing vm')
+      process.exit(1)
     }
 
     download(function (err) {
       if (err) return console.error(err)
       setup(function (err) {
         if (err) return console.error(err)
-        console.log('SETUP: smart os vm has been set up')
+        console.log('smart os vm has been set up')
         console.timeEnd('SETUP TIME')
+        console.log('booting vm to generate snapshot')
+        start(function (err) {
+          if (err) return console.error(err)
+          var keep = confirm('vm ready, keep it running? [Y/n] ')
+          
+          if (keep) {
+            console.log('leaving vm running, stop it any time with autopsy stop')
+            process.exit()
+          }
+
+          console.log('stopping vm, start it any time with autopsy start')
+          process.exit()
+        })
+
       })
     })
   })
